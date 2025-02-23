@@ -8,19 +8,19 @@ async function buildSite() {
     await fs.ensureDir('dist');
     
     // Copy static assets
-    await fs.copy('css', 'dist/css');
-    await fs.copy('js', 'dist/js');
+    await fs.copy('src/css', 'dist/css');
+    await fs.copy('src/js', 'dist/js');
     
     // Process markdown files
     await processPages();
     await processBlogPosts();
     
-    // Copy index.html
-    await fs.copy('index.html', 'dist/index.html');
+    // Copy base template as index.html
+    await fs.copy('src/templates/base.html', 'dist/index.html');
 }
 
 async function processPages() {
-    const pagesDir = 'pages';
+    const pagesDir = 'src/content/pages';
     const files = await fs.readdir(pagesDir);
     
     for (const file of files) {
@@ -38,7 +38,7 @@ async function processPages() {
 }
 
 async function processBlogPosts() {
-    const postsDir = 'blog/posts';
+    const postsDir = 'src/content/blog';
     const files = await fs.readdir(postsDir);
     
     const posts = [];
