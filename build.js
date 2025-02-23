@@ -3,6 +3,12 @@ const path = require('path');
 const marked = require('marked');
 const frontMatter = require('front-matter');
 
+// Configure marked for security
+marked.setOptions({
+    headerIds: false,
+    mangle: false
+});
+
 async function buildSite() {
     // Ensure build directory exists
     await fs.ensureDir('dist');
