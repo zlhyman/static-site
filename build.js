@@ -21,12 +21,12 @@ async function buildSite() {
     await processPages();
     await processBlogPosts();
     
-    // Copy base template as index.html
-    await fs.copy('src/templates/base.html', 'dist/index.html');
+    // Copy index.html to dist
+    await fs.copy('src/index.html', 'dist/index.html');
 }
 
 async function processPages() {
-    const pagesDir = 'src/content/pages';
+    const pagesDir = 'src/content';  // Changed from 'src/content/pages'
     const files = await fs.readdir(pagesDir);
     
     for (const file of files) {
